@@ -23,6 +23,5 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | b
 RUN source /root/.nvm/nvm.sh && nvm install --lts
 
 RUN curl -fsSL https://bun.sh/install | bash
-RUN bun install -g pm2
 
 CMD ["/bin/bash"]
