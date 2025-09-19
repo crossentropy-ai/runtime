@@ -12,7 +12,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     build-essential cmake \
     && rm -rf /var/lib/apt/lists/*
 
-RUN usermod -aG sudo ubuntu
+RUN usermod -aG sudo ubuntu && \
+    echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu && \
+    chmod 0440 /etc/sudoers.d/ubuntu
 USER ubuntu
 ENV PATH="/home/ubuntu/.local/bin:/home/ubuntu/.bun/bin:/home/ubuntu/.nvm/versions/node/$NODE_VERSION/bin:$PATH"
 
