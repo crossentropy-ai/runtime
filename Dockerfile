@@ -8,14 +8,11 @@ ENV NODE_VERSION=v22.19.0
 # Update package list and install essential packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    curl \
-    wget \
-    build-essential \
-    git \
-    unzip \
-    ca-certificates \
+    curl wget git unzip ca-certificates sudo \
+    build-essential cmake \
     && rm -rf /var/lib/apt/lists/*
 
+RUN usermod -aG sudo ubuntu
 USER ubuntu
 ENV PATH="/home/ubuntu/.local/bin:/home/ubuntu/.bun/bin:/home/ubuntu/.nvm/versions/node/$NODE_VERSION/bin:$PATH"
 
