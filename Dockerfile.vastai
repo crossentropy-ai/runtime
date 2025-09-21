@@ -12,7 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     build-essential cmake \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PATH="/root/.local/bin:/root/.bun/bin:/root/.nvm/versions/node/$NODE_VERSION/bin:$PATH"
+ENV PATH="/opt/nvim-linux-x86_64/bin:/root/.local/bin:/root/.bun/bin:/root/.nvm/versions/node/$NODE_VERSION/bin:$PATH"
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 RUN uv python install $PYTHON_VERSION
@@ -24,5 +24,10 @@ RUN curl -fsSL https://bun.sh/install | bash
 
 RUN git clone --single-branch https://github.com/gpakosz/.tmux.git /root/.tmux && \
     ln -sf .tmux/.tmux.conf /root/.tmux.conf
+
+RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz && \
+    tar xzf nvim-linux-x86_64.tar.gz && \
+    mv nvim-linux-x86_64 /opt && \
+    rm -rf nvim-linux-x86_64.tar.gz
 
 CMD ["/bin/bash"]
