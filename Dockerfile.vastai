@@ -22,4 +22,7 @@ RUN source /home/ubuntu/.nvm/nvm.sh && nvm install $NODE_VERSION
 
 RUN curl -fsSL https://bun.sh/install | bash
 
+RUN git clone --single-branch https://github.com/gpakosz/.tmux.git /root/.tmux && \
+    ln -sf .tmux/.tmux.conf /root/.tmux.conf
+
 CMD ["/bin/bash"]
